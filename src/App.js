@@ -9,6 +9,7 @@ import { OutlinedInput } from "@mui/material";
 export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [boxes, setBoxes] = useState(['', '', '', '']);
+  const [boxes2, setBoxes2] = useState(['', '', '', '']);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -17,9 +18,15 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const answer = 'abhi'; // jawaban yang benar
+    const answer2 = 'apel'; // jawaban yang benar
     if (inputValue.toLowerCase() === answer) {
       const newBoxes = answer.split('').map((char) => char.toUpperCase());
       setBoxes(newBoxes);
+    }
+    setInputValue('');
+    if (inputValue.toLowerCase() === answer2) {
+      const newBoxes2 = answer2.split('').map((char) => char.toUpperCase());
+      setBoxes2(newBoxes2);
     }
     setInputValue('');
   };
@@ -35,8 +42,7 @@ export default function App() {
         </MobileNav>
       </Navbar>
       <div className="flex justify-between">
-        <div>
-
+        <div className="w-[600px] ml-20 mt-10 pb-40">
           <p>1. Nama lain dari kata menang dalam permainan Mobile Legend adalah?<br /> <br />
             2. ..... Mata Sapi.<br /> <br />
             3. Benda bulat berputar yang terdapat dalam kendaraan adalah?<br /> <br />
@@ -52,6 +58,16 @@ export default function App() {
         <div className="container pl-8 pt-4 pb-32 max-[1640px]:w-[684px] max-[600px]:w-[300px]">
           <div className="flex max-[600px]:mt-10">
             {boxes.map((box, index) => (
+              <div
+                key={index}
+                className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
+              >
+                <p className="text-xl">{box}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center ml-[-400px]">
+            {boxes2.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -85,6 +101,6 @@ export default function App() {
           </div>
         </nav>
       </header>
-    </div>
+    </div >
   );
 }
