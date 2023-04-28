@@ -40,3 +40,8 @@ code {
 .title {
   font-family: "Poppins";
 }
+
+input:focus {
+  border-color: rgb(0, 255, 255);
+  outline: none;
+}
