@@ -11,6 +11,7 @@ import { OutlinedInput } from "@mui/material";
 
 export default function App(props) {
   const [inputValue, setInputValue] = useState('');
+  const [hideInput, setHideInput] = useState(true);
   const [boxes, setBoxes] = useState(['', '', '', '', '', '', '']);
   const [boxes2, setBoxes2] = useState(['', '', '', '', '']);
   const [boxes3, setBoxes3] = useState(['', '', '', '']);
@@ -24,6 +25,10 @@ export default function App(props) {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    console.log(e.target.value);
+    if (boxes && boxes2 && boxes3 && boxes3 && boxes4 && boxes5 && boxes6 && boxes7 && boxes8 && boxes9 && boxes10) {
+      setHideInput(true);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +96,7 @@ export default function App(props) {
       const jawaban = answer10.toUpperCase().split('');
       setBoxes10(jawaban);
     }
-    if (inputValue === boxes && boxes2 && boxes3 && boxes3 && boxes4 && boxes5 && boxes6 && boxes7 && boxes8 && boxes9 && boxes10) {
+    if (trimmedInputValue.toLowerCase() === answer || trimmedInputValue.toLowerCase() === answer2 || trimmedInputValue.toLowerCase() === answer3 || trimmedInputValue.toLowerCase() === answer4 || trimmedInputValue.toLowerCase() === answer5 || trimmedInputValue.toLowerCase() === answer6 || trimmedInputValue.toLowerCase() === answer7 || trimmedInputValue.toLowerCase() === answer8 || trimmedInputValue.toLowerCase() === answer9 || trimmedInputValue.toLowerCase() === answer10) {
       // Menampilkan SweetAlert
       MySwal.fire({
         title: <strong>Kerja Bagus!</strong>,
@@ -99,11 +104,34 @@ export default function App(props) {
         icon: 'success',
         time: 1000
       });
+    } else if (inputValue === '') {
+      MySwal.fire({
+        title: <strong>Jawabanmu belum diisi!</strong>,
+        html: <i>Isi dulu jawabannya !!</i>,
+        icon: 'warning',
+        time: 1000
+      });
+      // } else if (boxes && boxes2 && boxes3 && boxes3 && boxes4 && boxes5 && boxes6 && boxes7 && boxes8 && boxes9 && boxes10) {
+      //   MySwal.fire({
+      //     title: 'Sweet!',
+      //     text: 'Modal with a custom image.',
+      //     imageUrl: 'https://unsplash.it/400/200',
+      //     confirmButtonText: 'Mulai Ulang',
+      //     confirmButtonColor: '#3085d6',
+      //     showCancelButton: true,
+      //     imageWidth: 400,
+      //     imageHeight: 200,
+      //     imageAlt: 'Custom image',
+      //   }).then((result) => {
+      //     if (result.isConfirmed) {
+      //       window.location.reload()
+      //     }
+      //   })
     } else {
       // Menampilkan SweetAlert
       MySwal.fire({
         title: <strong>Jawabanmu Salah!</strong>,
-        html: <i>Coba lagi, Semangat:)</i>,
+        html: <i>Coba lagi, Semangat!!</i>,
         icon: 'error',
         time: 1000
       });
@@ -304,7 +332,7 @@ export default function App(props) {
                     placeholder="Masukkan jawaban"
                     value={inputValue}
                     onChange={handleInputChange}
-                    className="border-2 rounded-md max-[600px]:w-[120px] max-[600px]:h-[30px] px-4 py-2 ml-2"
+                    className={hideInput ? 'border-2 rounded-md max-[600px]:w-[120px] max-[600px]:h-[30px] px-4 py-2 ml-2' : 'hidden'}
                   />
                 </form>
               </div>
