@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import QRCode from "react-qr-code";
+import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import Typewriter from "typewriter-effect";
 import TextField from '@mui/material/TextField';
@@ -7,7 +9,7 @@ import { Input, MobileNav, Navbar } from "@material-tailwind/react";
 
 import { OutlinedInput } from "@mui/material";
 
-export default function App() {
+export default function App(props) {
   const [inputValue, setInputValue] = useState('');
   const [boxes, setBoxes] = useState(['', '', '', '', '', '', '']);
   const [boxes2, setBoxes2] = useState(['', '', '', '', '']);
@@ -26,6 +28,7 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const MySwal = withReactContent(Swal)
     const answer = 'victory'; // jawaban yang benar
     const answer2 = 'telur'; // jawaban yang benar
     const answer3 = 'roda'; // jawaban yang benar
@@ -88,109 +91,59 @@ export default function App() {
       const jawaban = answer10.toUpperCase().split('');
       setBoxes10(jawaban);
     }
+    if (inputValue === boxes && boxes2 && boxes3 && boxes3 && boxes4 && boxes5 && boxes6 && boxes7 && boxes8 && boxes9 && boxes10) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Kerja Bagus!</strong>,
+        html: <i>Kerenn kamu bisa menjawabnya</i>,
+        icon: 'success',
+        time: 1000
+      });
+    } else {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawabanmu Salah!</strong>,
+        html: <i>Coba lagi, Semangat:)</i>,
+        icon: 'error',
+        time: 1000
+      });
+    }
     setInputValue('');
-
-    if (inputValue === answer) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer2) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer3) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer4) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer5) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer6) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer7) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer8) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer9) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
-    if (inputValue === answer10) {
-      // Menampilkan SweetAlert
-      Swal.fire({
-        title: 'Pesan',
-        text: 'Nilai input adalah tertentu!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-    };
   }
+
+  // if (inputValue === answer && answer2 && answer3 && answer4 && answer5 && answer6 && answer7 && answer8 && answer9 && answer10) {
+  //   // Menampilkan SweetAlert
+  //   MySwal.fire({
+  //     title: <strong>Kerja Bagus!</strong>,
+  //     html: <i>Kerenn kamu bisa menjawabnya</i>,
+  //     icon: 'success'
+  //   })
+  // };
+
 
   return (
     <div>
-      <Navbar className="relative mx-auto max-w-screen py-2 px-4 border-4 h-32 rounded-none rounded-b-[176px] max-[600px]:rounded-b-[10px] max-[600px]:h-20 shadow-md border-cyan-400 box-border lg:px-8 lg:py-4" >
-        <div className="relative left-[106px] max-[600px]:left-5 max-[600px]:bottom-2 mx-auto items-center justify-between font-extrabold text-3xl leading-9">
-          <h1 className="title relative max-[600px]:w-[600px] max-[600px]:text-[18px] max-[400px]:top-2 max-[400px]:w-[400px] max-[400px]:text-[12px] text-black">Ayo Mainkan Teka-Teki Silang yang Menyenangkan ini!</h1>
+      <Navbar className="relative mx-auto max-w-screen py-2 md:py-2 px-4 border-4 h-32 md:h-32 rounded-none md:rounded-b-[176px] rounded-b-[10px] shadow-md border-cyan-400 box-border lg:px-8 lg:py-4" >
+        {/* <div className="relative left-[106px] max-[600px]:left-5 max-[600px]:bottom-2 mx-auto items-center justify-between text-3xl leading-9" style={{ opacity: 0.2 }}>
+          <h1 className="title relative max-[600px]:w-[600px] max-[600px]:text-[18px] max-[400px]:top-2 max-[400px]:w-[400px] max-[400px]:text-[12px] font-extrabold text-black">Ayo Mainkan Teka-Teki Silang yang Menyenangkan ini!</h1>
           <p className="relative left-28 top-3 font-normal font-medium text-base max-[600px]:text-[11px] max-[600px]:left-4 max-[600px]:top-0 max-[400px]:w-[400px] max-[400px]:text-[8px] max-[400px]:left-[8px] max-[400px]:top-0 max-[400px]:font-bold text-black">Perhatikan soal soal tersebut dan tulis jawabannya di kolom bawah Jawabannya adalah.</p>
+          <span className="title relative font-bold ml-40 bottom-[86px] text-[14px]">Scan QR </span>
+          <QRCode className="relative bottom-[88px] left-[945px]" size={80} value="192.168.43.125:3000" />
+        </div> */}
+        <div className="container mx-auto">
+          <div className="flex justify-around items-center md:mt-[-10px] mt-3">
+            <div className=" text-center md:mt-[-20px]">
+              <p className="text-md title font-bold md:text-2xl">Ayo Mainkan Teka-Teki Silang yang Menyenangkan ini!</p>
+              <p className="text-xs md:text-base md:mt-3">Perhatikan soal soal tersebut dan tulis jawabannya di kolom bawah Jawabannya adalah.</p>
+            </div>
+            <div className="hidden md:block md:text-center md:mr-10">
+              <span className="title font-bold">Scan QR</span>
+              <QRCode className="" size={80} value="192.168.43.125:3000" />
+            </div>
+          </div>
+
         </div>
-        <MobileNav>
-        </MobileNav>
+
       </Navbar>
       <div className="max-[2660px]:flex max-[600px]:flex-wrap-reverse">
         <div className="w-[600px] max-[600px]:w-[350px] max-[600px]:ml-6 max-[600px]:mt-[-20px] ml-20 mt-10 pb-40">
@@ -342,7 +295,7 @@ export default function App() {
       <header className="fixed bottom-0 left-0 right-0 z-10 border-4 h-32 bg-white rounded-none rounded-t-[176px] max-[600px]:rounded-t-[10px] max-[600px]:border-2 border-cyan-400 box-border">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center h-16">
-            <div className="tems-center mt-5 max-[600px]:mt-8">
+            <div className="justify-center mt-5 max-[600px]:mt-8">
               <h1 className='title text-center max-[600px]:text-[12px]'>Jawabannya adalah</h1>
               <div className="mt-2">
                 <form onSubmit={handleSubmit}>
