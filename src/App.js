@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import QRCode from "react-qr-code";
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
@@ -7,28 +7,27 @@ import TextField from '@mui/material/TextField';
 import { Fragment } from "react";
 import { Input, MobileNav, Navbar } from "@material-tailwind/react";
 
+import Perempuan from '../src/assets/perempuan.png'
+import Laki from '../src/assets/laki.png'
 import { OutlinedInput } from "@mui/material";
 
 export default function App(props) {
   const [inputValue, setInputValue] = useState('');
   const [hideInput, setHideInput] = useState(true);
-  const [boxes, setBoxes] = useState(['', '', '', '', '', '', '']);
-  const [boxes2, setBoxes2] = useState(['', '', '', '', '']);
-  const [boxes3, setBoxes3] = useState(['', '', '', '']);
-  const [boxes4, setBoxes4] = useState(['', '', '', '', '']);
-  const [boxes5, setBoxes5] = useState(['', '', '', '']);
-  const [boxes6, setBoxes6] = useState(['', '', '']);
-  const [boxes7, setBoxes7] = useState(['', '', '', '', '']);
-  const [boxes8, setBoxes8] = useState(['', '', '']);
-  const [boxes9, setBoxes9] = useState(['', '', '', '']);
-  const [boxes10, setBoxes10] = useState(['', '', '', '', '']);
+  const [kotak, setKotak] = useState(['', '', '', '', '', '', '']);
+  const [kotak2, setKotak2] = useState(['', '', '', '', '']);
+  const [kotak3, setKotak3] = useState(['', '', '', '']);
+  const [kotak4, setKotak4] = useState(['', '', '', '', '']);
+  const [kotak5, setKotak5] = useState(['', '', '', '']);
+  const [kotak6, setKotak6] = useState(['', '', '']);
+  const [kotak7, setKotak7] = useState(['', '', '', '', '']);
+  const [kotak8, setKotak8] = useState(['', '', '']);
+  const [kotak9, setKotak9] = useState(['', '', '', '']);
+  const [kotak10, setKotak10] = useState(['', '', '', '', '']);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     console.log(e.target.value);
-    if (boxes && boxes2 && boxes3 && boxes3 && boxes4 && boxes5 && boxes6 && boxes7 && boxes8 && boxes9 && boxes10) {
-      setHideInput(true);
-    }
   };
 
   const handleSubmit = (e) => {
@@ -49,52 +48,52 @@ export default function App(props) {
 
     if (trimmedInputValue.toLowerCase() === answer) {
       const jawaban = answer.toUpperCase().split('');
-      setBoxes(jawaban);
+      setKotak(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer2) {
       const jawaban = answer2.toUpperCase().split('');
-      setBoxes2(jawaban);
+      setKotak2(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer3) {
       const jawaban = answer3.toUpperCase().split('');
-      setBoxes3(jawaban);
+      setKotak3(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer4) {
       const jawaban = answer4.toUpperCase().split('');
-      setBoxes4(jawaban);
+      setKotak4(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer5) {
       const jawaban = answer5.toUpperCase().split('');
-      setBoxes5(jawaban);
+      setKotak5(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer6) {
       const jawaban = answer6.toUpperCase().split('');
-      setBoxes6(jawaban);
+      setKotak6(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer7) {
       const jawaban = answer7.toUpperCase().split('');
-      setBoxes7(jawaban);
+      setKotak7(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer8) {
       const jawaban = answer8.toUpperCase().split('');
-      setBoxes8(jawaban);
+      setKotak8(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer9) {
       const jawaban = answer9.toUpperCase().split('');
-      setBoxes9(jawaban);
+      setKotak9(jawaban);
     }
 
     if (trimmedInputValue.toLowerCase() === answer10) {
       const jawaban = answer10.toUpperCase().split('');
-      setBoxes10(jawaban);
+      setKotak10(jawaban);
     }
     if (trimmedInputValue.toLowerCase() === answer || trimmedInputValue.toLowerCase() === answer2 || trimmedInputValue.toLowerCase() === answer3 || trimmedInputValue.toLowerCase() === answer4 || trimmedInputValue.toLowerCase() === answer5 || trimmedInputValue.toLowerCase() === answer6 || trimmedInputValue.toLowerCase() === answer7 || trimmedInputValue.toLowerCase() === answer8 || trimmedInputValue.toLowerCase() === answer9 || trimmedInputValue.toLowerCase() === answer10) {
       // Menampilkan SweetAlert
@@ -102,41 +101,164 @@ export default function App(props) {
         title: <strong>Kerja Bagus!</strong>,
         html: <i>Kerenn kamu bisa menjawabnya</i>,
         icon: 'success',
-        time: 1000
+        timer: 3000
       });
     } else if (inputValue === '') {
       MySwal.fire({
         title: <strong>Jawabanmu belum diisi!</strong>,
         html: <i>Isi dulu jawabannya !!</i>,
-        icon: 'warning',
-        time: 1000
+        icon: 'question',
+        timer: 3000
       });
-      // } else if (boxes && boxes2 && boxes3 && boxes3 && boxes4 && boxes5 && boxes6 && boxes7 && boxes8 && boxes9 && boxes10) {
-      //   MySwal.fire({
-      //     title: 'Sweet!',
-      //     text: 'Modal with a custom image.',
-      //     imageUrl: 'https://unsplash.it/400/200',
-      //     confirmButtonText: 'Mulai Ulang',
-      //     confirmButtonColor: '#3085d6',
-      //     showCancelButton: true,
-      //     imageWidth: 400,
-      //     imageHeight: 200,
-      //     imageAlt: 'Custom image',
-      //   }).then((result) => {
-      //     if (result.isConfirmed) {
-      //       window.location.reload()
-      //     }
-      //   })
     } else {
       // Menampilkan SweetAlert
       MySwal.fire({
         title: <strong>Jawabanmu Salah!</strong>,
         html: <i>Coba lagi, Semangat!!</i>,
         icon: 'error',
-        time: 1000
+        timer: 3000
       });
     }
+    // if (kotak.join('') === answer && kotak2.join('') === answer2 && kotak3.join('') === answer3 && kotak4.join('') === answer4 && kotak5.join('') === answer5 && kotak6.join('') === answer6 && kotak7.join('') === answer7 && kotak8.join('') === answer8 && kotak9.join('') === answer9 && kotak10.join('') === answer10) {
+    //   MySwal.fire({
+    //     title: <strong>Selamat!</strong>,
+    //     html: <i>Kamu berhasil menemukan semua jawabannya!</i>,
+    //     icon: 'success',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Coba lagi',
+    //     cancelButtonText: 'Selesai',
+    //     reverseButtons: true
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       setBoxes(['', '', '', '', '', '', '']);
+    //       setkotak2(['', '', '', '', '']);
+    //       setKotak3(['', '', '', '']);
+    //       setKotak4(['', '', '', '', '']);
+    //       setKotak5(['', '', '', '']);
+    //       setKotak6(['', '', '']);
+    //       setKotak7(['', '', '', '', '']);
+    //       setKotak8(['', '', '']);
+    //       setKotak9(['', '', '', '']);
+    //       setKotak10(['', '', '', '', '']);
+    //       setHideInput(true);
+    //     } else {
+    //       setHideInput(false);
+    //     }
+    //   });
+    // }
+    if (trimmedInputValue.toLowerCase() === answer && kotak.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer2 && kotak2.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer3 && kotak3.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer4 && kotak4.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer5 && kotak5.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer6 && kotak6.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer7 && kotak7.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer8 && kotak8.every((box) => box !== '')) {
+      // Menampilkan SweetAlert
+      MySwal.fire({
+        title: <strong>Jawaban sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer9 && kotak9.every((box) => box !== '')) {
+      MySwal.fire({
+        title: <strong>Jawabanmu sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    } else if (trimmedInputValue.toLowerCase() === answer10 && kotak10.every((box) => box !== '')) {
+      MySwal.fire({
+        title: <strong>Jawabanmu sudah terisi!</strong>,
+        html: <i>Kamu sudah menjawab soal ini dengan benar</i>,
+        icon: 'warning',
+        timer: 3000
+      });
+    }
+
     setInputValue('');
+  }
+
+  const MySwal = withReactContent(Swal)
+
+  const SemuaBoxTerisi =
+    kotak.every((box) => box !== '') &&
+    kotak2.every((box) => box !== '') &&
+    kotak3.every((box) => box !== '') &&
+    kotak4.every((box) => box !== '') &&
+    kotak5.every((box) => box !== '') &&
+    kotak6.every((box) => box !== '') &&
+    kotak7.every((box) => box !== '') &&
+    kotak8.every((box) => box !== '') &&
+    kotak9.every((box) => box !== '') &&
+    kotak10.every((box) => box !== '');
+
+  if (SemuaBoxTerisi) {
+    MySwal.fire({
+      title: <strong>Selamat!</strong>,
+      html: <i>Kamu telah menyelesaikan semua teka teki silang ini, pilih opsi mulai ulang untuk mengulang game dan memainkannya kembali</i>,
+      imageUrl: 'https://media.istockphoto.com/id/1369741460/id/foto/piala-trofi-dengan-bintang-dengan-latar-belakang-putih.jpg?s=612x612&w=0&k=20&c=9zCaBNssZB_pLh3P2jkZH5a99YDBbhHITVYTzFkr7ng=',
+      confirmButtonText: 'Mulai Ulang',
+      confirmButtonColor: '#3085d6',
+      showCancelButton: true,
+      imageWidth: 250,
+      imageHeight: 280,
+      imageAlt: 'Custom image',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload()
+      }
+    })
   }
 
   // if (inputValue === answer && answer2 && answer3 && answer4 && answer5 && answer6 && answer7 && answer8 && answer9 && answer10) {
@@ -148,6 +270,18 @@ export default function App(props) {
   //   })
   // };
 
+  // Responsive
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = (e) => setIsMobile(e.matches);
+    mediaQuery.addEventListener('change', handleResize);
+
+    return () => mediaQuery.removeEventListener('change', handleResize);
+  }, []);
 
   return (
     <div>
@@ -187,12 +321,12 @@ export default function App(props) {
             10. Apa nama benda atau zat yang biasanya digunakan untuk membunuh atau mengendalikan hama tanaman atau serangga yang merusak?<br /> <br />
           </p>
         </div>
-        <div className="container pl-10 pt-7 pb-32 max-[600px]:mt-2 max-[1640px]:w-[684px] max-[600px]:w-[300px]">
-          <div className="flex max-[600px]:mt-10">
-            <div className="flex mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
+        <div className="container mx-auto md:mx-0 pt-7 pb-28 max-[600px]:mt-2 max-[1640px]:w-[684px] max-[600px]:w-[300px]">
+          <div className="flex justify-center ml-[-260px] max-[600px]:ml-0 max-[600px]:mt-10">
+            <div className="flex mt-2 mr-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">1</span>
             </div>
-            {boxes.map((box, index) => (
+            {kotak.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -201,11 +335,11 @@ export default function App(props) {
               </div>
             ))}
           </div>
-          <div className="flex justify-center ml-[-260px] max-[600px]:ml-[-27px]">
+          <div className="flex justify-center ml-[-260px] max-[600px]:ml-[-0px]">
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">2</span>
             </div>
-            {boxes2.map((box, index) => (
+            {kotak2.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -218,7 +352,7 @@ export default function App(props) {
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">3</span>
             </div>
-            {boxes3.map((box, index) => (
+            {kotak3.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -227,11 +361,11 @@ export default function App(props) {
               </div>
             ))}
           </div>
-          <div className="flex justify-center mb-5 ml-[-260px] max-[600px]:ml-[40px]">
+          <div className="flex justify-center mb-5 ml-[-260px] max-[600px]:ml-0">
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">4</span>
             </div>
-            {boxes4.map((box, index) => (
+            {kotak4.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -240,11 +374,11 @@ export default function App(props) {
               </div>
             ))}
           </div>
-          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[40px]">
+          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[0px]">
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">5</span>
             </div>
-            {boxes5.map((box, index) => (
+            {kotak5.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -257,7 +391,7 @@ export default function App(props) {
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">6</span>
             </div>
-            {boxes6.map((box, index) => (
+            {kotak6.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -270,7 +404,7 @@ export default function App(props) {
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">7</span>
             </div>
-            {boxes7.map((box, index) => (
+            {kotak7.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -279,11 +413,11 @@ export default function App(props) {
               </div>
             ))}
           </div>
-          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[40px]">
+          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[0px]">
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">8</span>
             </div>
-            {boxes8.map((box, index) => (
+            {kotak8.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -292,11 +426,11 @@ export default function App(props) {
               </div>
             ))}
           </div>
-          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[40px]">
+          <div className="flex justify-center ml-[-180px] max-[600px]:ml-[40px]">
             <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">9</span>
             </div>
-            {boxes9.map((box, index) => (
+            {kotak9.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -305,11 +439,11 @@ export default function App(props) {
               </div>
             ))}
           </div>
-          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[40px]">
-            <div className="flex mr-2 mt-2 items-center justify-center w-6 h-6 border-2 border-cyan-500 rounded-full">
+          <div className="flex justify-center ml-[-220px] max-[600px]:ml-[0px]">
+            <div className="flex mr-2 mt-1 items-center justify-center w-8 h-8 border-2 border-cyan-500 rounded-full">
               <span className="text-black font-bold">10</span>
             </div>
-            {boxes10.map((box, index) => (
+            {kotak10.map((box, index) => (
               <div
                 key={index}
                 className="border border-gray-400 rounded-md w-10 h-10 flex items-center justify-center"
@@ -320,7 +454,7 @@ export default function App(props) {
           </div>
         </div>
       </div>
-      <header className="fixed bottom-0 left-0 right-0 z-10 border-4 h-32 bg-white rounded-none rounded-t-[176px] max-[600px]:rounded-t-[10px] max-[600px]:border-2 border-cyan-400 box-border">
+      <div className="fixed bottom-0 left-0 right-0 z-10 border-4 h-32 bg-white rounded-none rounded-t-[176px] max-[600px]:rounded-t-[10px] max-[600px]:border-2 border-cyan-400 box-border">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center h-16">
             <div className="justify-center mt-5 max-[600px]:mt-8">
@@ -337,9 +471,13 @@ export default function App(props) {
                 </form>
               </div>
             </div>
+            <div className="flex justify-around items-center z-50 bottom-0">
+              <img alt="laki" src={Laki} className="fixed absolute mt-16 " style={!isMobile ? { width: '40%', marginRight: '1000px' } : { width: '100%', marginRight: '400px' }} />
+              <img alt="perempuan" src={Perempuan} className="fixed absolute mt-16" style={!isMobile ? { width: '40%', marginLeft: '600px' } : { width: '100%', marginRight: '-130px' }} />
+            </div>
           </div>
         </nav>
-      </header>
-    </div >
+      </div>
+    </div>
   );
 }
